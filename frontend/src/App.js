@@ -363,6 +363,15 @@ function AppContent() {
       )}
           </div>
         </div>
+      </div>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <ToastProvider>
+        <AppContent />
       </ToastProvider>
     </ErrorBoundary>
   );

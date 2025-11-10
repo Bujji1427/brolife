@@ -1961,17 +1961,24 @@ body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 430px;
+  left: 0;
+  right: 0;
   background: rgba(16, 16, 18, 0.95);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 20px;
+  padding: 8px env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 8px) env(safe-area-inset-left, 20px);
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.nav-items {
   display: flex;
   justify-content: space-around;
-  z-index: 100;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .nav-item {

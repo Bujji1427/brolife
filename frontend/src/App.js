@@ -230,10 +230,8 @@ function AppContent() {
   };
 
   return (
-    <ErrorBoundary>
-      <ToastProvider>
-        <div className="App">
-          <div className="mobile-container">
+    <div className="App">
+      <div className="mobile-container">
         {/* Top Header */}
         <div className="app-header">
           <div className="app-title">

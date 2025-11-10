@@ -2038,6 +2038,43 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Mobile Navigation Indicator */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--active-index, 0) * 25% + 12.5%);
+  width: calc(25% - 20px);
+  height: 3px;
+  background: var(--accent-primary);
+  border-radius: 3px 3px 0 0;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+/* Responsive Bottom Navigation */
+@media (min-width: 768px) {
+  .bottom-nav {
+    padding: 10px env(safe-area-inset-right, 32px) env(safe-area-inset-bottom, 10px) env(safe-area-inset-left, 32px);
+  }
+
+  .nav-items {
+    max-width: 600px;
+  }
+
+  .nav-item {
+    min-width: 80px;
+    padding: 12px;
+  }
+
+  .nav-icon {
+    font-size: 22px;
+  }
+
+  .nav-label {
+    font-size: 11px;
+  }
+}
+
 /* Modal */
 .modal-overlay {
   position: fixed;

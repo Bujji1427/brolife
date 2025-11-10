@@ -16,6 +16,12 @@ import { useUser, useTimetable, useChat } from './hooks';
 import { setGlobalToastContext } from './components/ToastNotifications';
 
 function App() {
+  // Capture toast context for global use
+  const { addToast: globalAddToast } = useToast();
+
+  React.useEffect(() => {
+    setGlobalToastContext({ addToast: globalAddToast });
+  }, [globalAddToast]);
   const [activeTab, setActiveTab] = useState('home');
   const [showSetup, setShowSetup] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);

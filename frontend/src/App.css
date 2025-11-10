@@ -1744,6 +1744,153 @@ body {
   }
 }
 
+/* Error Boundary Styles */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--gradient-card);
+}
+
+.error-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(20px);
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.retry-info {
+  margin-bottom: 16px;
+}
+
+.retry-info small {
+  color: var(--accent-warning);
+  font-size: 12px;
+}
+
+.error-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.retry-btn, .refresh-btn, .support-btn {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.retry-btn:hover, .refresh-btn:hover, .support-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.retry-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.refresh-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.support-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.support-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.error-details {
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+.toggle-details {
+  background: none;
+  border: none;
+  color: var(--accent-primary);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.toggle-details:hover {
+  background: rgba(20, 184, 166, 0.1);
+}
+
+.technical-details {
+  margin-top: 16px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+}
+
+.error-type, .error-stack, .component-stack {
+  margin-bottom: 8px;
+}
+
+.error-type strong, .error-stack strong, .component-stack strong {
+  color: var(--accent-primary);
+}
+
+.component-stack pre {
+  color: var(--text-secondary);
+  font-size: 10px;
+  line-height: 1.4;
+  margin: 4px 0 0 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 @media (max-width: 360px) {
   .nav-label {
     font-size: 9px;
@@ -1761,5 +1908,18 @@ body {
 
   .generate-timetable-btn {
     align-self: stretch;
+  }
+
+  .error-container {
+    padding: 20px;
+  }
+
+  .error-actions {
+    gap: 8px;
+  }
+
+  .retry-btn, .refresh-btn, .support-btn {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }

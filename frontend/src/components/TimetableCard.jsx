@@ -269,8 +269,16 @@ const TimetableCard = ({ timetable, onViewFullSchedule, onRegenerate, isLoading 
       <div className="timetable-header">
         <h2>📅 {showLogger ? 'Log Your Day' : 'Your Daily Timetable'}</h2>
         <div className="header-actions">
-          <button 
-            className="toggle-view-btn" 
+          {/* Storage Status Indicator */}
+          {!showLogger && (
+            <div className="storage-status">
+              {autoSaveStatus === 'saving' && <span className="save-indicator saving">💾 Saving...</span>}
+              {autoSaveStatus === 'saved' && <span className="save-indicator saved">✓ Saved</span>}
+              {autoSaveStatus === 'error' && <span className="save-indicator error">⚠️ Save Failed</span>}
+            </div>
+          )}
+          <button
+            className="toggle-view-btn"
             onClick={() => setShowLogger(!showLogger)}
           >
             {showLogger ? '📅 Schedule' : '📝 Log Day'}
@@ -280,8 +288,28 @@ const TimetableCard = ({ timetable, onViewFullSchedule, onRegenerate, isLoading 
               🔄
             </button>
           )}
+          {Object.keys(editedTasks).length > 0 && !showLogger && (
+            <button
+              className="clear-edits-btn"
+              onClick={clearAllEdits}
+              title="Clear all edits"
+            >
+              🗑️
+            </button>
+          )}
         </div>
       </div>
+
+      {/* Storage Warning Banner */}
+      {storageWarning && (
+        <div className="storage-warning">
+          <span className="warning-icon">⚠️</span>
+          <span className="warning-text">Storage is almost full. Your edits may not be saved properly.</span>
+          <button className="warning-action" onClick={clearAllEdits}>
+            Clear All Edits
+          </button>
+        </div>
+      )}
       
       <div className="content-container">
         <div className={`schedule-section ${showLogger ? 'hidden' : 'visible'}`}>

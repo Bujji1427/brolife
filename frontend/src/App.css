@@ -233,6 +233,245 @@ body {
   }
 }
 
+/* Responsive Typography */
+@media (min-width: 768px) {
+  .app-title h1 {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .message-text {
+    font-size: 15px;
+  }
+
+  .tracker-info h3 {
+    font-size: 17px;
+  }
+
+  .timetable-header h2,
+  .trackers-header h2,
+  .profile-header h2 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-title h1 {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .message-text {
+    font-size: 16px;
+  }
+
+  .tracker-info h3 {
+    font-size: 18px;
+  }
+
+  .timetable-header h2,
+  .trackers-header h2,
+  .profile-header h2 {
+    font-size: 24px;
+  }
+
+  /* Larger touch targets on desktop */
+  .nav-item {
+    min-width: 80px;
+    padding: 12px;
+  }
+
+  .desktop-nav-item {
+    padding: 10px 20px;
+  }
+
+  /* Larger buttons on desktop */
+  .generate-timetable-btn,
+  .timetable-btn,
+  .save-btn,
+  .submit-feedback-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+
+  .send-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  .message-input {
+    font-size: 15px;
+    padding: 14px 18px;
+    min-height: 48px;
+  }
+}
+
+/* Responsive Grid Layouts for Desktop */
+@media (min-width: 1024px) {
+  .desktop-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    height: calc(100vh - 64px);
+    padding: 24px 48px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .desktop-sidebar {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    overflow-y: auto;
+  }
+
+  .desktop-main {
+    overflow-y: auto;
+  }
+
+  /* Two-column tracker layout on desktop */
+  .trackers-full {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* Side-by-side chat and timetable on desktop */
+  .home-content.desktop-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Full-width chat on desktop */
+  .full-chat .messages-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Three-column layout for ultra-wide screens */
+  @media (min-width: 1440px) {
+    .trackers-full {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .home-content.desktop-dashboard {
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+    }
+  }
+}
+
+/* Responsive Spacing System */
+.responsive-spacing {
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+}
+
+@media (min-width: 768px) {
+  .responsive-spacing {
+    --spacing-xs: 6px;
+    --spacing-sm: 12px;
+    --spacing-md: 20px;
+    --spacing-lg: 32px;
+    --spacing-xl: 40px;
+    --spacing-2xl: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-spacing {
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 40px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 72px;
+  }
+}
+
+/* Hover States for Desktop */
+@media (min-width: 1024px) {
+  .desktop-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .tracker-card.desktop-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .skeleton-card.desktop-hover:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Keyboard navigation improvements */
+  .keyboard-focus:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  .desktop-nav-item:focus-visible,
+  .nav-item:focus-visible,
+  .send-btn:focus-visible,
+  .generate-timetable-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.3);
+  }
+}
+
+/* Animation Performance for Larger Screens */
+@media (min-width: 1024px) {
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* Reduced motion preference support */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-container,
+    .tracker-card,
+    .message-content,
+    .typing-indicator span {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* High DPI/Retina Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .app-header,
+  .desktop-nav,
+  .message-content,
+  .tracker-card {
+    border-width: 0.5px;
+  }
+}
+
 /* Updated buttons and cards */
 .generate-timetable-btn, .timetable-btn {
   background: var(--gradient-primary);

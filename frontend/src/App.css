@@ -152,6 +152,27 @@ body {
     justify-content: space-between;
   }
 
+  .desktop-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    font-size: 28px;
+  }
+
+  .brand-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .desktop-nav-left {
     display: flex;
     align-items: center;

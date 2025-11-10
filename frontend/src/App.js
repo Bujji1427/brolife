@@ -8,9 +8,12 @@ import TrackerCard from './components/TrackerCard';
 import ProfileView from './components/ProfileView';
 import BottomNav from './components/BottomNav';
 import HomePage from './pages/HomePage';
+import ErrorBoundary from './components/ErrorBoundary';
+import { ToastProvider } from './components/ToastNotifications';
 
 // Hooks
 import { useUser, useTimetable, useChat } from './hooks';
+import { setGlobalToastContext } from './components/ToastNotifications';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');

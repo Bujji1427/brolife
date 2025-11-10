@@ -696,6 +696,151 @@ body {
   }
 }
 
+/* Connection Status Styles */
+.connection-status {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.connection-status.connected {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.connection-status.connecting {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.connection-status.disconnected {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.connection-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.connection-icon {
+  font-size: 14px;
+}
+
+.connection-text {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.retry-count {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.retry-connection-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 4px 8px;
+  color: var(--text-primary);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-connection-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Message Error Styles */
+.message.error .message-content {
+  border-left: 3px solid #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.error-actions {
+  margin-top: 8px;
+}
+
+.retry-btn {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: #ef4444;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Chat Actions */
+.chat-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Enhanced Loading Message */
+.loading-message .message-content {
+  background: rgba(20, 184, 166, 0.05);
+  border-left: 3px solid var(--accent-primary);
+}
+
+/* Connection Status Responsive */
+@media (max-width: 480px) {
+  .connection-status {
+    padding: 6px 12px;
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+
+  .connection-info {
+    justify-content: center;
+  }
+
+  .retry-connection-btn {
+    align-self: center;
+  }
+
+  .chat-actions {
+    padding: 6px 16px;
+  }
+
+  .action-btn {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
 /* Updated buttons and cards */
 .generate-timetable-btn, .timetable-btn {
   background: var(--gradient-primary);

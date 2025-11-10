@@ -223,8 +223,10 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="mobile-container">
+    <ErrorBoundary>
+      <ToastProvider>
+        <div className="App">
+          <div className="mobile-container">
         {/* Top Header */}
         <div className="app-header">
           <div className="app-title">

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DailyLogger from './DailyLogger';
+import { storageManager } from '../utils/storageManager';
+import { useToast } from './ToastNotifications';
 
 const EditableTimeBlock = ({ time, task, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);

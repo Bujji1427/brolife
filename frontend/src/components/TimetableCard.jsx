@@ -48,15 +48,162 @@ const EditableTimeBlock = ({ time, task, onSave }) => {
 const TimetableCard = ({ timetable, onViewFullSchedule, onRegenerate, isLoading = false, isPreview = false }) => {
   const [showLogger, setShowLogger] = useState(false);
   const [editedTasks, setEditedTasks] = useState({});
-  const handleTaskEdit = (time, newTask) => {
-    setEditedTasks(prev => ({
-      ...prev,
-      [time]: newTask
-    }));
-    // Save to localStorage
-    const savedTasks = JSON.parse(localStorage.getItem('editedTasks') || '{}');
-    savedTasks[time] = newTask;
-    localStorage.setItem('editedTasks', JSON.stringify(savedTasks));
+  const [storageWarning, setStorageWarning] = useState(false);
+  const [autoSaveStatus, setAutoSaveStatus] = useState('saved'); // saved, saving, error
+  const { addToast } = useToast();
+
+  // Load edited tasks from storage on mount
+  useEffect(() => {
+    const loadEditedTasks = async () => {
+      try {
+        const savedTasks = await storageManager.getItem('brolife_edited_tasks');
+        if (savedTasks) {
+          setEditedTasks(savedTasks);
+        }
+      } catch (error) {
+        console.warn('Failed to load edited tasks from storage:', error);
+        addToast({
+          type: 'warning',
+          title: 'Storage Issue',
+          message: 'Could not load saved edits. Some edits may be lost.',
+          duration: 5000
+        });
+      }
+    };
+
+    loadEditedTasks();
+  }, [addToast]);
+
+  // Listen for storage quota warnings
+  useEffect(() => {
+    const handleStorageWarning = (event) => {
+      const { usageRatio, remainingBytes } = event.detail;
+      setStorageWarning(true);
+
+      addToast({
+        type: 'warning',
+        title: 'Storage Almost Full',
+        message: `Browser storage is ${usageRatio}% full. Consider clearing old data.`,
+        duration: 8000,
+        action: {
+          label: 'Clear Edits',
+          handler: async () => {
+            try {
+              await storageManager.removeItem('brolife_edited_tasks');
+              setEditedTasks({});
+              setStorageWarning(false);
+              addToast({
+                type: 'success',
+                title: 'Edits Cleared',
+                message: 'Your saved edits have been cleared.',
+                duration: 3000
+              });
+            } catch (error) {
+              console.error('Failed to clear edits:', error);
+            }
+          }
+        }
+      });
+    };
+
+    window.addEventListener('storageWarning', handleStorageWarning);
+    return () => window.removeEventListener('storageWarning', handleStorageWarning);
+  }, [addToast]);
+
+  const handleTaskEdit = async (time, newTask) => {
+    try {
+      setAutoSaveStatus('saving');
+
+      // Update local state first for immediate UI feedback
+      setEditedTasks(prev => ({
+        ...prev,
+        [time]: newTask
+      }));
+
+      // Save to enhanced storage manager
+      await storageManager.setItem('brolife_edited_tasks', {
+        ...editedTasks,
+        [time]: newTask
+      }, {
+        compress: true,
+        persistent: true
+      });
+
+      setAutoSaveStatus('saved');
+      setStorageWarning(false);
+
+    } catch (error) {
+      setAutoSaveStatus('error');
+      console.error('Failed to save edited task:', error);
+
+      const errorType = error.name || 'unknown';
+
+      if (errorType === 'QuotaExceededError' || error.message?.includes('quota')) {
+        setStorageWarning(true);
+        addToast({
+          type: 'error',
+          title: 'Storage Full',
+          message: 'Cannot save edits: storage is full. Clear some data to continue.',
+          duration: 8000,
+          action: {
+            label: 'Clear All Edits',
+            handler: async () => {
+              try {
+                await storageManager.removeItem('brolife_edited_tasks');
+                setEditedTasks({});
+                setStorageWarning(false);
+                setAutoSaveStatus('saved');
+                addToast({
+                  type: 'success',
+                  title: 'Edits Cleared',
+                  message: 'All edits have been cleared to free up space.',
+                  duration: 4000
+                });
+              } catch (clearError) {
+                console.error('Failed to clear edits:', clearError);
+              }
+            }
+          }
+        });
+      } else {
+        addToast({
+          type: 'error',
+          title: 'Save Failed',
+          message: 'Could not save your edit. Please try again.',
+          duration: 5000,
+          action: {
+            label: 'Retry',
+            handler: () => handleTaskEdit(time, newTask)
+          }
+        });
+      }
+    }
+  };
+
+  const clearAllEdits = async () => {
+    try {
+      setAutoSaveStatus('saving');
+      await storageManager.removeItem('brolife_edited_tasks');
+      setEditedTasks({});
+      setStorageWarning(false);
+      setAutoSaveStatus('saved');
+
+      addToast({
+        type: 'success',
+        title: 'Edits Cleared',
+        message: 'All your timetable edits have been cleared.',
+        duration: 4000
+      });
+    } catch (error) {
+      setAutoSaveStatus('error');
+      console.error('Failed to clear edits:', error);
+      addToast({
+        type: 'error',
+        title: 'Failed to Clear',
+        message: 'Could not clear edits. Please try again.',
+        duration: 5000
+      });
+    }
   };
 
   const getTaskText = (time, defaultTask) => {

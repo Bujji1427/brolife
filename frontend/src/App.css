@@ -841,6 +841,124 @@ body {
   }
 }
 
+/* Storage Status Indicators */
+.storage-status {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.save-indicator {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.save-indicator.saving {
+  color: var(--accent-warning);
+  background: rgba(251, 191, 36, 0.1);
+}
+
+.save-indicator.saved {
+  color: var(--accent-success);
+  background: rgba(6, 214, 160, 0.1);
+}
+
+.save-indicator.error {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.clear-edits-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+
+.clear-edits-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Storage Warning Banner */
+.storage-warning {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.warning-icon {
+  font-size: 16px;
+  color: var(--accent-warning);
+}
+
+.warning-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.warning-action {
+  background: var(--accent-warning);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.warning-action:hover {
+  background: #eab308;
+  transform: translateY(-1px);
+}
+
+/* Storage Status Responsive */
+@media (max-width: 480px) {
+  .storage-status {
+    margin-right: 8px;
+  }
+
+  .save-indicator {
+    font-size: 10px;
+    padding: 1px 4px;
+  }
+
+  .clear-edits-btn {
+    padding: 4px 6px;
+    font-size: 11px;
+    margin-left: 4px;
+  }
+
+  .storage-warning {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .warning-action {
+    align-self: center;
+  }
+}
+
 /* Updated buttons and cards */
 .generate-timetable-btn, .timetable-btn {
   background: var(--gradient-primary);
